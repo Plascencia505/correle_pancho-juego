@@ -19,8 +19,7 @@ class GestorGrafico {
 private:
   Adafruit_SSD1306 pantalla;
 
-  // Métodos internos actualizados para coincidir con tu .cpp final
-  void dibujarIntro();
+  void dibujarIntro(int fase, unsigned long tiempoEnFase, int posJugador, int posPolicia, int posGordo);
   void dibujarMenuInicio(int opcionMenu, bool cursorVisible);
   void dibujarEscenario(EntidadJugador* jugador, GestorObstaculos* obstaculos, GestorNiveles* niveles);
   void dibujarCapaPausa();
@@ -28,11 +27,11 @@ private:
   void dibujarVictoriaFinal(bool cursorVisible);
   void dibujarGameOver(long score, bool cursorVisible);
   void dibujarTablaHighScores(SistemaArchivos* archivos);
-  void dibujarRegistroNombre(long score, const char* nombreActual, int indiceLetra, bool cursorVisible);
+  void dibujarRegistroNombre(long score, const char* nombreActual, int indiceLetra);
+  void dibujarDesglose(long puntosBase, int vidas, long total, bool cursorVisible);
 
 public:
   GestorGrafico();
-
   bool inicializar();
 
   void renderizarFrame(
@@ -44,9 +43,15 @@ public:
     const char* nombreInput,
     int indiceLetra,
     int opcionMenu,
-    bool cursorVisible
-  );
+    bool cursorVisible,
 
-  void dibujarDesglose(long puntosBase, int vidas, long total, bool cursorVisible);
+    // Parametros para la intro del juego 
+    int introFase = 0,
+    unsigned long introTiempoFase = 0,
+    int introXJugador = 0,
+    int introXPolicia = 128,
+    int introXGordo = 128
+  );
 };
+
 #endif
