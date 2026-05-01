@@ -73,7 +73,7 @@ void setup() {
   pinMode(PIN_TRIG, OUTPUT);
   pinMode(PIN_ECHO, INPUT);
 
-  audio.inicializar(PIN_BUZ_OST1, PIN_BUZ_OST2, PIN_BUZ_SFX);
+  audio.inicializar(PIN_BUZ_OST2, PIN_BUZ_OST1, PIN_BUZ_SFX);
 
   if (!grafico.inicializar() || !archivos.inicializar()) {
     Serial.println(F("Error de hardware detectado."));
@@ -110,26 +110,49 @@ void loop() {
         if (faseIntro == 0 && tiempoEnFase >= 2000) {
           faseIntro = 1;
           tiempoInicioFase = ahora;
-        } else if (faseIntro == 1 && tiempoEnFase >= 1600) {
+        } else if (faseIntro == 1 && tiempoEnFase >= 1800) {
           faseIntro = 2;
           tiempoInicioFase = ahora;
           introXJugador = -16;
           introXPolicia = 144;
           introXGordo = 168;
-        } else if (faseIntro == 2 && tiempoEnFase >= 2200) {
-          faseIntro = 3;
-          tiempoInicioFase = ahora;
         }
 
-        if (faseIntro == 2) {
-          if (introXJugador < 10) introXJugador += 2;
-          if (tiempoEnFase > 600) {
-            if (introXPolicia > 55) introXPolicia -= 2;
-            if (introXGordo > 85) introXGordo -= 2;
+        else if (faseIntro == 2) {
+          introXJugador += 3;
+          if (introXJugador > 144) {
+            faseIntro = 3;
+            tiempoInicioFase = ahora;
           }
         }
 
-        if (faseIntro == 3 && (btnAPulsado || btnBPulsado) && (millis() - ultimoTiempoAccion > TIEMPO_REBOTE)) {
+        else if (faseIntro == 3 && tiempoEnFase >= 500) {
+          faseIntro = 4;
+          tiempoInicioFase = ahora;
+          introXPolicia = -16;
+          introXGordo = -40;
+        }
+
+        else if (faseIntro == 4) {
+          introXPolicia += 3;
+          introXGordo += 3;
+          if (introXPolicia > 144) {
+            faseIntro = 5;
+            tiempoInicioFase = ahora;
+            introXJugador = 128;
+          }
+        }
+
+        else if (faseIntro == 5) {
+          introXJugador -= 3;
+          if (introXJugador <= 56) {
+            faseIntro = 6;
+            tiempoInicioFase = ahora;
+            introXJugador = 56;
+          }
+        }
+
+        if (faseIntro == 6 && (btnAPulsado || btnBPulsado) && (millis() - ultimoTiempoAccion > TIEMPO_REBOTE)) {
           audio.reproducirSFX(btnAPulsado ? SFX_BTN_A : SFX_BTN_B);
           ultimoTiempoAccion = millis();
           faseIntro = 0;
@@ -170,6 +193,7 @@ void loop() {
       }
       if (millis() - tiempoUltimaPresencia > TIEMPO_LIMITE_AFK) {
         ultimoTiempoAccion = millis();
+        tiempoUltimaPresencia = millis();
         gameManager.cambiarEstado(ESTADO_PAUSA);
         break;
       }
@@ -178,6 +202,7 @@ void loop() {
       if (btnAPulsado && (millis() - ultimoTiempoAccion > TIEMPO_REBOTE)) {
         audio.reproducirSFX(SFX_BTN_A);
         ultimoTiempoAccion = millis();
+        tiempoUltimaPresencia = millis();
         gameManager.cambiarEstado(ESTADO_PAUSA);
         break;
       }

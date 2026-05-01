@@ -44,7 +44,7 @@ private:
 
   void actualizarCanal(CanalAudio& canal);
   void detenerCanal(CanalAudio& canal);
-  void iniciarPista(CanalAudio& canal, const int (*notas)[2], int longi, bool bucle, float tono);
+  void iniciarPista(CanalAudio& canal, const int (*notas)[2], int longi, bool bucle, float tono, unsigned long offsetMs = 0);
 
 public:
   GestorAudio();

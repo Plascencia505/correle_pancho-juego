@@ -1,7 +1,8 @@
 #include "GestorGrafico.h"
 #include "Sprites.h"
 
-GestorGrafico::GestorGrafico() : pantalla(ANCHO_PANTALLA, ALTO_PANTALLA, &Wire, OLED_RESET) {}
+GestorGrafico::GestorGrafico()
+  : pantalla(ANCHO_PANTALLA, ALTO_PANTALLA, &Wire, OLED_RESET) {}
 
 bool GestorGrafico::inicializar() {
   if (!pantalla.begin(SSD1306_SWITCHCAPVCC, DIRECCION_I2C)) {
@@ -56,10 +57,7 @@ void GestorGrafico::renderizarFrame(
       dibujarVictoriaFinal(cursorVisible);
       break;
     case ESTADO_DESGLOSE_SCORE:
-      dibujarDesglose(jugador->getPuntuacion(),
-                      jugador->getVidas(),
-                      jugador->getPuntuacion() + (jugador->getVidas() * 500),
-                      cursorVisible);
+      dibujarDesglose(jugador->getPuntuacion(), jugador->getVidas(), jugador->getPuntuacion() + (jugador->getVidas() * 500), cursorVisible);
       break;
     case ESTADO_REGISTRO_SCORE:
       dibujarRegistroNombre(jugador->getPuntuacion(), nombreInput, indiceLetra);
@@ -79,12 +77,11 @@ void GestorGrafico::renderizarFrame(
 
 void GestorGrafico::dibujarIntro(int fase, unsigned long tiempoEnFase, int posJugador, int posPolicia, int posGordo) {
   switch (fase) {
-
-    // Fase 0: Splash de estudio
     case 0:
       {
         bool visible = (tiempoEnFase < 600) ? ((tiempoEnFase / 80) % 2) : true;
         if (visible) {
+          pantalla.setTextSize(1);
           pantalla.setCursor(28, 20);
           pantalla.print(F("Un juego de:"));
           pantalla.setCursor(14, 35);
@@ -93,67 +90,81 @@ void GestorGrafico::dibujarIntro(int fase, unsigned long tiempoEnFase, int posJu
         break;
       }
 
-    // Fase 1: Título letra por letra
     case 1:
       {
         const char* titulo = "CORRELE PANCHO!!";
-        const int nLetras = 17;
+        const int nTotal = 20;
         int letrasVisibles = tiempoEnFase / 80;
-        if (letrasVisibles > nLetras) letrasVisibles = nLetras;
+        if (letrasVisibles > nTotal) letrasVisibles = nTotal;
 
-        pantalla.setTextSize(2);
-        pantalla.setCursor(4, 20);
+        pantalla.setTextSize(1);
+        pantalla.setCursor(4, 0);
         for (int i = 0; i < letrasVisibles; i++) {
           pantalla.print(titulo[i]);
         }
-        if (letrasVisibles < nLetras && (tiempoEnFase / 250) % 2) {
+        if (letrasVisibles < nTotal && (tiempoEnFase / 250) % 2) {
           pantalla.print(F("_"));
         }
         break;
       }
 
-    // Fase 2: Sprites en movimiento
     case 2:
       {
-        pantalla.setTextSize(2);
-        pantalla.setCursor(4, 5);
-        pantalla.print(F("CORRELE"));
-        pantalla.setCursor(4, 22);
-        pantalla.print(F("PANCHO!!!"));
-
-        pantalla.drawLine(0, 56, 128, 56, SSD1306_WHITE);
-
-        // Jugador siempre visible
-        pantalla.drawBitmap(posJugador, 38, sprite_mexicano, 16, 16, SSD1306_WHITE);
-
-        // Enemigos solo cuando ya están dentro del frame
-        if (posPolicia <= 111) {
-          pantalla.drawBitmap(posPolicia, 38, sprite_policia, 16, 16, SSD1306_WHITE);
-        }
-        if (posGordo <= 111) {
-          pantalla.drawBitmap(posGordo, 38, sprite_gordo_copete, 16, 16, SSD1306_WHITE);
+        pantalla.setTextSize(1);
+        pantalla.setCursor(4, 0);
+        pantalla.print(F("CORRELE PANCHO!!"));
+        if (posJugador >= -16 && posJugador <= 128) {
+          pantalla.drawBitmap(posJugador, 36, sprite_mexicano, 16, 16, SSD1306_WHITE);
         }
         break;
       }
 
     case 3:
       {
-        pantalla.setTextSize(2);
-        pantalla.setCursor(4, 5);
-        pantalla.print(F("CORRELE"));
-        pantalla.setCursor(4, 22);
-        pantalla.print(F("PANCHO!!!"));
+        pantalla.setTextSize(1);
+        pantalla.setCursor(4, 0);
+        pantalla.print(F("CORRELE PANCHO!!"));
+        break;
+      }
 
-        pantalla.drawLine(0, 56, 128, 56, SSD1306_WHITE);
+    case 4:
+      {
+        pantalla.setTextSize(1);
+        pantalla.setCursor(4, 0);
+        pantalla.print(F("CORRELE PANCHO!!"));
 
-        pantalla.drawBitmap(10, 38, sprite_mexicano, 16, 16, SSD1306_WHITE);
-        pantalla.drawBitmap(55, 38, sprite_policia, 16, 16, SSD1306_WHITE);
-        pantalla.drawBitmap(85, 38, sprite_gordo_copete, 16, 16, SSD1306_WHITE);
+        if (posPolicia >= -16 && posPolicia <= 128) {
+          pantalla.drawBitmap(posPolicia, 36, sprite_policia, 16, 16, SSD1306_WHITE);
+        }
+        if (posGordo >= -16 && posGordo <= 128) {
+          pantalla.drawBitmap(posGordo, 36, sprite_gordo_copete, 16, 16, SSD1306_WHITE);
+        }
+        break;
+      }
+
+    case 5:
+      {
+        pantalla.setTextSize(1);
+        pantalla.setCursor(4, 0);
+        pantalla.print(F("CORRELE PANCHO!!"));
+
+        if (posJugador >= -16 && posJugador <= 128) {
+          pantalla.drawBitmap(posJugador, 36, sprite_mexicano_izq, 16, 16, SSD1306_WHITE);
+        }
+        break;
+      }
+
+    case 6:
+      {
+        pantalla.setTextSize(1);
+        pantalla.setCursor(4, 0);
+        pantalla.print(F("CORRELE PANCHO!!"));
+
+        pantalla.drawBitmap(56, 36, sprite_mexicano_izq, 16, 16, SSD1306_WHITE);
 
         if ((tiempoEnFase / 500) % 2) {
-          pantalla.setTextSize(1);
-          pantalla.setCursor(7, 47);
-          pantalla.print(F("- PRESS A BUTTON -"));
+          pantalla.setCursor(14, 56);
+          pantalla.print(F("PRESS ANY BUTTON"));
         }
         break;
       }
