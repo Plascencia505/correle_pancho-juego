@@ -12,13 +12,11 @@ GestorAudio::GestorAudio() {
   pistaActual = PISTA_NINGUNA;
 }
 
-void GestorAudio::inicializar(int pMelodia, int pArmonia, int pSfx) {
+void GestorAudio::inicializar(int pMelodia, int pSfx) {
   canalMelodia.pin = pMelodia;
-  canalArmonia.pin = pArmonia;
   canalSFX.pin = pSfx;
 
   pinMode(canalMelodia.pin, OUTPUT);
-  pinMode(canalArmonia.pin, OUTPUT);
   pinMode(canalSFX.pin, OUTPUT);
   canalSFX.tieneSFXActivo = false;
 
@@ -27,7 +25,6 @@ void GestorAudio::inicializar(int pMelodia, int pArmonia, int pSfx) {
 
 void GestorAudio::actualizar() {
   actualizarCanal(canalMelodia);
-  actualizarCanal(canalArmonia);
   actualizarCanal(canalSFX);
 }
 
@@ -73,7 +70,6 @@ void GestorAudio::detenerCanal(CanalAudio& canal) {
 
 void GestorAudio::detenerMusica() {
   detenerCanal(canalMelodia);
-  detenerCanal(canalArmonia);
   pistaActual = PISTA_NINGUNA;
 }
 
@@ -81,15 +77,14 @@ void GestorAudio::iniciarPista(
   CanalAudio& canal,
   const int (*notas)[2],
   int longi, bool bucle,
-  float tono,
-  unsigned long offsetMs) {
+  float tono) {
   canal.notas = notas;
   canal.longitudTotal = longi;
   canal.indiceActual = 0;
   canal.enBucle = bucle;
   canal.modificadorTono = tono;
   canal.reproduciendo = true;
-  canal.tiempoInicioNota = millis() + offsetMs;
+  canal.tiempoInicioNota = millis();
 
   int frecuencia = leerFrecuencia(notas, 0);
   if (frecuencia > 0) {
@@ -107,31 +102,24 @@ void GestorAudio::reproducirMusica(TipoPista pista) {
   switch (pista) {
     case PISTA_INTRO:
       iniciarPista(canalMelodia, intro_melodia, intro_melodia_len, true, 1.0f);
-      iniciarPista(canalArmonia, intro_melodia, intro_melodia_len, true, 0.5f, 2);
       break;
     case PISTA_MENU:
       iniciarPista(canalMelodia, menu_melodia, menu_melodia_len, true, 1.0f);
-      iniciarPista(canalArmonia, menu_melodia, menu_melodia_len, true, 0.5f, 2);
       break;
     case PISTA_JUEGO:
       iniciarPista(canalMelodia, juego_melodia, juego_melodia_len, true, 1.0f);
-      iniciarPista(canalArmonia, juego_melodia, juego_melodia_len, true, 0.5f, 2);
       break;
     case PISTA_PAUSA:
-      iniciarPista(canalMelodia, juego_melodia, juego_melodia_len, true, 0.85f);
-      iniciarPista(canalArmonia, juego_melodia, juego_melodia_len, true, 0.425f, 2);
+      iniciarPista(canalMelodia, juego_melodia, juego_melodia_len, true, 0.80f);
       break;
     case PISTA_HIGHSCORES:
       iniciarPista(canalMelodia, scores_melodia, scores_melodia_len, true, 1.0f);
-      iniciarPista(canalArmonia, scores_melodia, scores_melodia_len, true, 0.5f, 2);
       break;
     case PISTA_GAMEOVER:
       iniciarPista(canalMelodia, gameover_melodia, gameover_melodia_len, true, 1.0f);
-      iniciarPista(canalArmonia, gameover_melodia, gameover_melodia_len, true, 0.5f, 2);
       break;
     case PISTA_NUEVO_RECORD:
       iniciarPista(canalMelodia, record_melodia, record_melodia_len, true, 1.0f);
-      iniciarPista(canalArmonia, record_melodia, record_melodia_len, true, 0.5f, 2);
       break;
     default:
       break;

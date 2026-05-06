@@ -37,19 +37,18 @@ struct CanalAudio {
 class GestorAudio {
 private:
   CanalAudio canalMelodia;
-  CanalAudio canalArmonia;
   CanalAudio canalSFX;
 
   TipoPista pistaActual;
 
   void actualizarCanal(CanalAudio& canal);
   void detenerCanal(CanalAudio& canal);
-  void iniciarPista(CanalAudio& canal, const int (*notas)[2], int longi, bool bucle, float tono, unsigned long offsetMs = 0);
+  void iniciarPista(CanalAudio& canal, const int (*notas)[2], int longi, bool bucle, float tono);
 
 public:
   GestorAudio();
 
-  void inicializar(int pinMelodia, int pinArmonia, int pinSfx);
+  void inicializar(int pinMelodia, int pinSfx);
   void actualizar();
 
   void reproducirMusica(TipoPista pista);

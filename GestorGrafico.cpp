@@ -92,27 +92,38 @@ void GestorGrafico::dibujarIntro(int fase, unsigned long tiempoEnFase, int posJu
 
     case 1:
       {
-        const char* titulo = "CORRELE PANCHO!!";
-        const int nTotal = 20;
+        const char* linea1 = "CORRELE";
+        const char* linea2 = "PANCHO!!";
+        const int nL1 = 7;
+        const int nL2 = 8;
+        const int nTotal = nL1 + nL2;
+
         int letrasVisibles = tiempoEnFase / 80;
         if (letrasVisibles > nTotal) letrasVisibles = nTotal;
 
-        pantalla.setTextSize(1);
-        pantalla.setCursor(4, 0);
-        for (int i = 0; i < letrasVisibles; i++) {
-          pantalla.print(titulo[i]);
-        }
-        if (letrasVisibles < nTotal && (tiempoEnFase / 250) % 2) {
-          pantalla.print(F("_"));
+        pantalla.setTextSize(2);
+
+        int enL1 = letrasVisibles < nL1 ? letrasVisibles : nL1;
+        pantalla.setCursor(22, 0);
+        for (int i = 0; i < enL1; i++) pantalla.print(linea1[i]);
+        if (letrasVisibles < nL1 && (tiempoEnFase / 250) % 2) pantalla.print(F("_"));
+
+        if (letrasVisibles > nL1) {
+          int enL2 = letrasVisibles - nL1;
+          pantalla.setCursor(16, 18);
+          for (int i = 0; i < enL2; i++) pantalla.print(linea2[i]);
+          if (letrasVisibles < nTotal && (tiempoEnFase / 250) % 2) pantalla.print(F("_"));
         }
         break;
       }
 
     case 2:
       {
-        pantalla.setTextSize(1);
-        pantalla.setCursor(4, 0);
-        pantalla.print(F("CORRELE PANCHO!!"));
+        pantalla.setTextSize(2);
+        pantalla.setCursor(22, 0);
+        pantalla.print(F("CORRELE"));
+        pantalla.setCursor(16, 18);
+        pantalla.print(F("PANCHO!!"));
         if (posJugador >= -16 && posJugador <= 128) {
           pantalla.drawBitmap(posJugador, 36, sprite_mexicano, 16, 16, SSD1306_WHITE);
         }
@@ -121,17 +132,21 @@ void GestorGrafico::dibujarIntro(int fase, unsigned long tiempoEnFase, int posJu
 
     case 3:
       {
-        pantalla.setTextSize(1);
-        pantalla.setCursor(4, 0);
-        pantalla.print(F("CORRELE PANCHO!!"));
+        pantalla.setTextSize(2);
+        pantalla.setCursor(22, 0);
+        pantalla.print(F("CORRELE"));
+        pantalla.setCursor(16, 18);
+        pantalla.print(F("PANCHO!!"));
         break;
       }
 
     case 4:
       {
-        pantalla.setTextSize(1);
-        pantalla.setCursor(4, 0);
-        pantalla.print(F("CORRELE PANCHO!!"));
+        pantalla.setTextSize(2);
+        pantalla.setCursor(22, 0);
+        pantalla.print(F("CORRELE"));
+        pantalla.setCursor(16, 18);
+        pantalla.print(F("PANCHO!!"));
 
         if (posPolicia >= -16 && posPolicia <= 128) {
           pantalla.drawBitmap(posPolicia, 36, sprite_policia, 16, 16, SSD1306_WHITE);
@@ -144,9 +159,11 @@ void GestorGrafico::dibujarIntro(int fase, unsigned long tiempoEnFase, int posJu
 
     case 5:
       {
-        pantalla.setTextSize(1);
-        pantalla.setCursor(4, 0);
-        pantalla.print(F("CORRELE PANCHO!!"));
+        pantalla.setTextSize(2);
+        pantalla.setCursor(22, 0);
+        pantalla.print(F("CORRELE"));
+        pantalla.setCursor(16, 18);
+        pantalla.print(F("PANCHO!!"));
 
         if (posJugador >= -16 && posJugador <= 128) {
           pantalla.drawBitmap(posJugador, 36, sprite_mexicano_izq, 16, 16, SSD1306_WHITE);
@@ -156,13 +173,16 @@ void GestorGrafico::dibujarIntro(int fase, unsigned long tiempoEnFase, int posJu
 
     case 6:
       {
-        pantalla.setTextSize(1);
-        pantalla.setCursor(4, 0);
-        pantalla.print(F("CORRELE PANCHO!!"));
+        pantalla.setTextSize(2);
+        pantalla.setCursor(22, 0);
+        pantalla.print(F("CORRELE"));
+        pantalla.setCursor(16, 18);
+        pantalla.print(F("PANCHO!!"));
 
         pantalla.drawBitmap(56, 36, sprite_mexicano_izq, 16, 16, SSD1306_WHITE);
 
         if ((tiempoEnFase / 500) % 2) {
+          pantalla.setTextSize(1);
           pantalla.setCursor(14, 56);
           pantalla.print(F("PRESS ANY BUTTON"));
         }

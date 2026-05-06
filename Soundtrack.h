@@ -54,48 +54,39 @@
 
 // PISTA 1: INTRO
 const int PROGMEM intro_melodia[][2] = {
-  { E5, DUR_S },
-  { E5, DUR_S },
-  { REST, DUR_S },
-  { E5, DUR_S },
-  { REST, DUR_S },
-  { C5, DUR_S },
-  { E5, DUR_E },
-  { G5, DUR_E },
-  { REST, DUR_E },
-  { G4, DUR_E },
-  { REST, DUR_E },
-  { C5, DUR_E },
-  { REST, DUR_S },
-  { G4, DUR_E },
-  { REST, DUR_S },
-  { E4, DUR_E },
-  { REST, DUR_S },
-  { A4, DUR_S },
-  { REST, DUR_S },
-  { B4, DUR_S },
-  { REST, DUR_S },
-  { AS4, DUR_S },
-  { A4, DUR_E },
-  { G4, DUR_S },
-  { E5, DUR_S },
-  { G5, DUR_S },
-  { A5, DUR_E },
-  { F5, DUR_S },
-  { G5, DUR_S },
-  { REST, DUR_S },
-  { E5, DUR_E },
-  { C5, DUR_S },
-  { D5, DUR_S },
-  { B4, DUR_E },
-  { REST, DUR_E },
-  { C5, DUR_S },
-  { E5, DUR_S },
-  { G5, DUR_S },
-  { C6, DUR_E },
-  { G5, DUR_S },
-  { E5, DUR_S },
-  { C5, DUR_H },
+  {E5,  DUR_S}, {E5,  DUR_S}, {REST,DUR_S}, {E5,  DUR_S},
+  {REST,DUR_S}, {C5,  DUR_S}, {E5,  DUR_E}, {G5,  DUR_E},
+  {REST,DUR_E}, {G4,  DUR_E}, {REST,DUR_E},
+  {C5,  DUR_E}, {REST,DUR_S}, {G4,  DUR_E}, {REST,DUR_S},
+  {E4,  DUR_E}, {REST,DUR_S}, {A4,  DUR_S},
+  {REST,DUR_S}, {B4,  DUR_S}, {REST,DUR_S}, {AS4, DUR_S},
+  {A4,  DUR_E}, {G4,  DUR_S}, {E5,  DUR_S}, {G5,  DUR_S},
+  {A5,  DUR_E}, {F5,  DUR_S}, {G5,  DUR_S},
+  {REST,DUR_S}, {E5,  DUR_E}, {C5,  DUR_S}, {D5,  DUR_S},
+  {B4,  DUR_E}, {REST,DUR_E},
+
+  {C5,  DUR_E}, {E5,  DUR_E}, {G5,  DUR_E}, {E5,  DUR_E},
+  {F5,  DUR_E}, {E5,  DUR_E}, {D5,  DUR_H},
+  {C5,  DUR_E}, {E5,  DUR_E}, {G5,  DUR_E}, {C6,  DUR_E},
+  {B5,  DUR_E}, {A5,  DUR_E}, {G5,  DUR_H},
+  {E5,  DUR_E}, {D5,  DUR_E}, {C5,  DUR_E}, {D5,  DUR_E},
+  {E5,  DUR_E}, {C5,  DUR_E}, {G4,  DUR_H},
+  {A4,  DUR_E}, {B4,  DUR_E}, {C5,  DUR_E}, {B4,  DUR_E},
+  {A4,  DUR_E}, {G4,  DUR_E}, {E4,  DUR_H},
+
+  {E5,  DUR_S}, {E5,  DUR_S}, {REST,DUR_S}, {E5,  DUR_S},
+  {REST,DUR_S}, {C5,  DUR_S}, {E5,  DUR_E}, {G5,  DUR_E},
+  {REST,DUR_E}, {G4,  DUR_E}, {REST,DUR_E},
+  {C5,  DUR_E}, {REST,DUR_S}, {G4,  DUR_E}, {REST,DUR_S},
+  {E4,  DUR_E}, {REST,DUR_S}, {A4,  DUR_S},
+  {REST,DUR_S}, {B4,  DUR_S}, {REST,DUR_S}, {AS4, DUR_S},
+  {A4,  DUR_E}, {G4,  DUR_S}, {E5,  DUR_S}, {G5,  DUR_S},
+  {A5,  DUR_E}, {F5,  DUR_S}, {G5,  DUR_S},
+  {REST,DUR_S}, {E5,  DUR_E}, {C5,  DUR_S}, {D5,  DUR_S},
+  {B4,  DUR_E}, {REST,DUR_E},
+
+  {C5,  DUR_S}, {E5,  DUR_S}, {G5,  DUR_S}, {C6,  DUR_E},
+  {G5,  DUR_S}, {E5,  DUR_S}, {C5,  DUR_H},
 };
 const int intro_melodia_len = sizeof(intro_melodia) / sizeof(intro_melodia[0]);
 
@@ -282,38 +273,14 @@ const int gameover_armonia_len = sizeof(gameover_armonia) / sizeof(gameover_armo
 
 // PISTA 6: NUEVO RECORD (Fanfarria Triunfal)
 const int PROGMEM record_melodia[][2] = {
-  { C5, DUR_S },
-  { C5, DUR_S },
-  { C5, DUR_S },
-  { REST, DUR_S },
-  { C5, DUR_S },
-  { E5, DUR_S },
-  { G5, DUR_E },
-  { E5, DUR_S },
-  { G5, DUR_S },
-  { C6, DUR_H },
-  { G5, DUR_E },
-  { FS5, DUR_E },
-  { F5, DUR_E },
-  { DS5, DUR_E },
-  { E5, DUR_E },
-  { REST, DUR_S },
-  { GS4, DUR_S },
-  { A4, DUR_S },
-  { C5, DUR_S },
-  { REST, DUR_S },
-  { A4, DUR_S },
-  { C5, DUR_S },
-  { D5, DUR_E },
-  { REST, DUR_E },
-  { C5, DUR_S },
-  { C5, DUR_S },
-  { C5, DUR_S },
-  { C5, DUR_S },
-  { C5, DUR_S },
-  { D5, DUR_S },
-  { E5, DUR_E },
-  { C5, DUR_S },
+  { C5, DUR_S }, { C5, DUR_S }, { C5, DUR_S }, { REST, DUR_S },
+  { C5, DUR_S }, { E5, DUR_S }, { G5, DUR_E }, { E5, DUR_S },
+  { G5, DUR_S }, { C6, DUR_H }, { G5, DUR_E }, { FS5, DUR_E },
+  { F5, DUR_E }, { DS5, DUR_E }, { E5, DUR_E }, { REST, DUR_S },
+  { GS4, DUR_S }, { A4, DUR_S }, { C5, DUR_S }, { REST, DUR_S },
+  { A4, DUR_S }, { C5, DUR_S }, { D5, DUR_E }, { REST, DUR_E },
+  { C5, DUR_S }, { C5, DUR_S }, { C5, DUR_S }, { C5, DUR_S },
+  { C5, DUR_S }, { D5, DUR_S }, { E5, DUR_E }, { C5, DUR_S },
   { D5, DUR_S },
   { E5, DUR_E },
   { REST, DUR_S },
@@ -326,37 +293,33 @@ const int record_melodia_len = sizeof(record_melodia) / sizeof(record_melodia[0]
 const int PROGMEM record_armonia[][2] = { { REST, DUR_W } };
 const int record_armonia_len = sizeof(record_armonia) / sizeof(record_armonia[0]);
 
-// EFECTOS DE SONIDO
+// Salto: glissando ascendente corto
 const int PROGMEM sfx_salto[][2] = {
-  { C5, DUR_S },
-  { D5, DUR_S },
-  { E5, DUR_S },
-  { G5, DUR_S },
-  { A5, DUR_S },
-  { C6, DUR_S },
+  {C5,  DUR_S},
+  {E5,  DUR_S},
+  {G5,  DUR_S},
 };
 const int sfx_salto_len = sizeof(sfx_salto) / sizeof(sfx_salto[0]);
 
+// Daño: caída descendente
 const int PROGMEM sfx_dano[][2] = {
-  { G5, DUR_S },
-  { D5, DUR_S },
-  { AS4, DUR_S },
-  { FS4, DUR_S },
-  { D4, DUR_S },
-  { B3, DUR_S },
-  { G3, DUR_E },
+  {A4,  DUR_S},
+  {E4,  DUR_S},
+  {B3,  DUR_E},
 };
 const int sfx_dano_len = sizeof(sfx_dano) / sizeof(sfx_dano[0]);
 
+// Botón A: confirmación
 const int PROGMEM sfx_btna[][2] = {
-  { C5, DUR_S },
-  { E5, DUR_S },
-  { G5, DUR_S },
+  {E5,  DUR_S},
+  {G5,  DUR_S},
+  {C6,  DUR_S},
 };
 const int sfx_btna_len = sizeof(sfx_btna) / sizeof(sfx_btna[0]);
 
+// Botón B: cancelación
 const int PROGMEM sfx_btnb[][2] = {
-  { G4, DUR_S },
-  { C4, DUR_S },
+  {G4,  DUR_S},
+  {C4,  DUR_S},
 };
 const int sfx_btnb_len = sizeof(sfx_btnb) / sizeof(sfx_btnb[0]);

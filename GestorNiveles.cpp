@@ -9,14 +9,14 @@ void GestorNiveles::inicializarNivel(int numeroNivel) {
   distanciaRecorrida = 0.0;
 
   velocidadMaxima = 4.5;   // Velocidad máximo
-  tasaIncremento = 0.003;  // Aceleración por frame
+  tasaIncremento = 0.004;  // Aceleración por frame
 
 
   enemigoPosX = -4;  // Posición del enemigo
   enemigoRetrocediendo = false;
 
   // Largo del primer nivel
-  float distanciaBase = 2200.0;
+  float distanciaBase = 2500.0;
   umbralRetroceso = 200.0;  // Rendición del enemigo
 
   //Diseño de nivel 2
